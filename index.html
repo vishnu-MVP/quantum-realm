@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quantum Realm — An Interactive Journey Into Quantum Computing</title>
+  <meta name="description" content="A cinematic, interactive web experience exploring quantum computing: superposition, entanglement, qubits, and quantum gates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="loader" class="loader">
+    <div class="loader-content">
+      <div class="loader-orb"></div>
+      <p class="loader-text">Initializing Quantum Field…</p>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay">
+      <h1 class="hero-title">
+        <span class="title-line">QUANTUM</span>
+        <span class="title-line title-line--accent">REALM</span>
+      </h1>
+      <p class="hero-subtitle">An interactive journey into the fabric of reality</p>
+      <div class="scroll-indicator">
+        <span class="scroll-text">Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational: What is Quantum Computing -->
+  <section id="intro" class="section section--intro reveal">
+    <div class="section-inner">
+      <h2 class="section-title">What Is Quantum Computing?</h2>
+      <div class="intro-grid">
+        <div class="glass-panel intro-card">
+          <div class="intro-icon">⚛</div>
+          <h3>Classical vs Quantum</h3>
+          <p>Classical computers use bits — strictly 0 or 1. Quantum computers use <strong>qubits</strong>, which can exist in a <em>superposition</em> of both states simultaneously, unlocking exponential computational power.</p>
+        </div>
+        <div class="glass-panel intro-card">
+          <div class="intro-icon">∞</div>
+          <h3>Superposition</h3>
+          <p>A qubit doesn't just choose 0 or 1 — it explores a continuous spectrum of possibilities. When measured, it <em>collapses</em> to a definite state, but until then, it holds all potentials at once.</p>
+        </div>
+        <div class="glass-panel intro-card">
+          <div class="intro-icon">🔗</div>
+          <h3>Entanglement</h3>
+          <p>Two qubits can become <em>entangled</em> — their fates intertwined across any distance. Measure one, and the other instantly reflects a correlated state, the phenomenon Einstein called "spooky action at a distance."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Qubit Lab -->
+  <section id="qubit-lab" class="section section--lab reveal">
+    <div class="section-inner">
+      <h2 class="section-title">Interactive Qubit Lab</h2>
+      <p class="section-desc">Apply quantum gates to a qubit and watch its state evolve on the Bloch sphere in real-time.</p>
+      <div class="lab-container">
+        <div class="glass-panel lab-bloch">
+          <h3>Bloch Sphere</h3>
+          <canvas id="bloch-canvas" width="400" height="400"></canvas>
+          <div class="bloch-state">
+            <span class="state-label">|ψ⟩ =</span>
+            <span id="state-vector" class="state-value">1.000|0⟩ + 0.000|1⟩</span>
+          </div>
+        </div>
+        <div class="glass-panel lab-controls">
+          <h3>Quantum Gates</h3>
+          <p class="control-hint">Click a gate to apply it to the qubit.</p>
+          <div class="gate-grid">
+            <button class="gate-btn" data-gate="H" title="Hadamard — creates superposition">
+              <span class="gate-symbol">H</span>
+              <span class="gate-name">Hadamard</span>
+            </button>
+            <button class="gate-btn" data-gate="X" title="Pauli-X — quantum NOT">
+              <span class="gate-symbol">X</span>
+              <span class="gate-name">Pauli-X</span>
+            </button>
+            <button class="gate-btn" data-gate="Y" title="Pauli-Y">
+              <span class="gate-symbol">Y</span>
+              <span class="gate-name">Pauli-Y</span>
+            </button>
+            <button class="gate-btn" data-gate="Z" title="Pauli-Z — phase flip">
+              <span class="gate-symbol">Z</span>
+              <span class="gate-name">Pauli-Z</span>
+            </button>
+            <button class="gate-btn" data-gate="S" title="S gate — phase">
+              <span class="gate-symbol">S</span>
+              <span class="gate-name">Phase-S</span>
+            </button>
+            <button class="gate-btn" data-gate="T" title="T gate — π/8 phase">
+              <span class="gate-symbol">T</span>
+              <span class="gate-name">Phase-T</span>
+            </button>
+          </div>
+          <div class="prob-bars">
+            <h4>Measurement Probabilities</h4>
+            <div class="prob-row">
+              <span class="prob-label">P(|0⟩)</span>
+              <div class="prob-track"><div id="prob0" class="prob-fill prob-fill--0"></div></div>
+              <span id="prob0-val" class="prob-num">100%</span>
+            </div>
+            <div class="prob-row">
+              <span class="prob-label">P(|1⟩)</span>
+              <div class="prob-track"><div id="prob1" class="prob-fill prob-fill--1"></div></div>
+              <span id="prob1-val" class="prob-num">0%</span>
+            </div>
+          </div>
+          <button id="measure-btn" class="measure-btn">⚡ Measure Qubit</button>
+          <button id="reset-btn" class="reset-btn">↺ Reset to |0⟩</button>
+          <div id="measure-result" class="measure-result"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Entanglement Demo -->
+  <section id="entanglement" class="section section--entangle reveal">
+    <div class="section-inner">
+      <h2 class="section-title">Entanglement Demo</h2>
+      <p class="section-desc">Two entangled qubits. Measure one — the other collapses instantly.</p>
+      <div class="entangle-container">
+        <div class="glass-panel entangle-qubit">
+          <h3>Qubit A</h3>
+          <div class="entangle-orb" id="orb-a">
+            <div class="orb-inner" id="orb-inner-a">?</div>
+          </div>
+          <button id="measure-a" class="measure-btn">Measure A</button>
+        </div>
+        <div class="entangle-link">
+          <div class="link-line"></div>
+          <span class="link-label">Entangled</span>
+          <div class="link-line"></div>
+        </div>
+        <div class="glass-panel entangle-qubit">
+          <h3>Qubit B</h3>
+          <div class="entangle-orb" id="orb-b">
+            <div class="orb-inner" id="orb-inner-b">?</div>
+          </div>
+          <button id="measure-b" class="measure-btn">Measure B</button>
+        </div>
+      </div>
+      <div class="glass-panel entangle-controls">
+        <button id="prepare-bell" class="gate-btn gate-btn--wide">
+          <span class="gate-symbol">|Φ+⟩</span>
+          <span class="gate-name">Prepare Bell State</span>
+        </button>
+        <button id="reset-entangle" class="reset-btn">Reset</button>
+        <p id="entangle-status" class="entangle-status">Click "Prepare Bell State" to entangle the qubits.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Superposition Visualization -->
+  <section id="superposition" class="section section--super reveal">
+    <div class="section-inner">
+      <h2 class="section-title">Superposition Visualization</h2>
+      <p class="section-desc">Watch the wave function evolve. The amplitude bars show the quantum state's probability distribution.</p>
+      <div class="glass-panel wave-container">
+        <canvas id="wave-canvas" width="800" height="300"></canvas>
+        <div class="wave-controls">
+          <button id="wave-superpose" class="gate-btn">
+            <span class="gate-symbol">H</span>
+            <span class="gate-name">Superpose</span>
+          </button>
+          <button id="wave-measure" class="measure-btn">⚡ Measure</button>
+          <button id="wave-reset" class="reset-btn">↺ Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational: Quantum Gates -->
+  <section id="gates-edu" class="section section--gates-edu reveal">
+    <div class="section-inner">
+      <h2 class="section-title">The Quantum Gate Toolkit</h2>
+      <div class="gates-grid">
+        <div class="glass-panel gate-info">
+          <div class="gate-big">H</div>
+          <h3>Hadamard Gate</h3>
+          <p>Creates superposition by transforming |0⟩ into an equal blend of |0⟩ and |1⟩. The gateway to quantum parallelism.</p>
+          <code class="matrix">1/√2 · [[1, 1], [1, -1]]</code>
+        </div>
+        <div class="glass-panel gate-info">
+          <div class="gate-big">X</div>
+          <h3>Pauli-X Gate</h3>
+          <p>The quantum NOT gate. Flips |0⟩ → |1⟩ and |1⟩ → |0⟩, a 180° rotation around the X axis of the Bloch sphere.</p>
+          <code class="matrix">[[0, 1], [1, 0]]</code>
+        </div>
+        <div class="glass-panel gate-info">
+          <div class="gate-big">Z</div>
+          <h3>Pauli-Z Gate</h3>
+          <p>Flips the phase of |1⟩ while leaving |0⟩ unchanged. A 180° rotation around the Z axis — it doesn't change probabilities, only phases.</p>
+          <code class="matrix">[[1, 0], [0, -1]]</code>
+        </div>
+        <div class="glass-panel gate-info">
+          <div class="gate-big">CNOT</div>
+          <h3>CNOT Gate</h3>
+          <p>A two-qubit gate that flips the target qubit only when the control qubit is |1⟩. The primary tool for creating entanglement.</p>
+          <code class="matrix">[[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]]</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-title">QUANTUM REALM</p>
+      <p class="footer-text">An interactive exploration of quantum computing principles.</p>
+      <p class="footer-text footer-text--small">Built with Three.js · Custom GLSL Shaders · Vanilla JS Quantum Simulator</p>
+    </div>
+  </footer>
+
+  <!-- Three.js via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/quantum.js"></script>
+  <script src="js/shaders.js"></script>
+  <script src="js/bloch.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/wave.js"></script>
+  <script src="js/entanglement.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
